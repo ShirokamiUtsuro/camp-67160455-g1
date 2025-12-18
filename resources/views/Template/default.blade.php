@@ -34,6 +34,7 @@
     <body>
         <div class="container border rounded p-4 mt-5 mx-auto"
         style="max-width: 700px; background: #ffffff;">
+
             <h1 class="mb-4 text-center">File Default</h1>
             @yield('content')
         </div>
