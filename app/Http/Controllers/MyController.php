@@ -11,7 +11,7 @@ class MyController extends Controller
     public $myval = "";
     // constructor
     // MyController()
-    function __constructor(){
+    function __construct(){
 
     }
 
@@ -27,5 +27,24 @@ class MyController extends Controller
         echo $req->input('mynumber');
         $data['num'] = $req->input('mynumber');
         return view('myview.calculate', $data);
+    }
+
+    public function workshop()
+    {
+        return view('html101');
+    }
+
+    public function store(Request $request)
+    {
+        return view('myview.result', [
+            'fname'     => $request->fname,
+            'lname'     => $request->lname,
+            'birthdate' => $request->birthdate,
+            'gender'    => $request->gender,
+            'address'   => $request->address,
+            'color'     => $request->color,
+            'theme'     => $request->theme,
+            'agreement' => $request->agreement
+        ]);
     }
 }

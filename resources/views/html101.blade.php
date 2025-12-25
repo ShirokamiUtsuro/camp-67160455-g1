@@ -3,13 +3,14 @@
 @section('title','Workshop Form')
 @section('content')
         <h1 class="mb-4 text-center">Workshop #HTML - FORM</h1>
-            <form id = "form">
+            <form id="form" method="POST" action="/workshop">
+                @csrf
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-4">
                         <label for="fname">ชื่อ</label>
                     </div>
                     <div class="col">
-                        <input id="fname" class="form-control">
+                        <input id="fname" name="fname" class="form-control">
                         <div class="valid-feedback">
                             ถูกต้อง
                         </div>
@@ -24,7 +25,7 @@
                         <label for="lname">สกุล</label>
                     </div>
                     <div class="col">
-                        <input id="lname" class="form-control">
+                        <input id="lname" name="lname" class="form-control">
                         <div class="valid-feedback">
                             ถูกต้อง
                         </div>
@@ -39,7 +40,7 @@
                         <label for="fname">วัน/เดือน/ปีเกิด</label>
                     </div>
                     <div class="col">
-                        <input type="date" id="birthdate" class="form-control" max="{{ date('Y-m-d') }}">
+                        <input type="date" id="birthdate" name="birthdate" class="form-control" max="{{ date('Y-m-d') }}">
                         <div class="valid-feedback">
                             ถูกต้อง
                         </div>
@@ -55,11 +56,11 @@
                     </div>
                     <div class="col d-flex align-items-center gap-3" id="gender">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="male">
+                            <input class="form-check-input" type="radio" name="gender" value="ชาย" id="male">
                             <label class="form-check-label" for="male">ชาย</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="female">
+                            <input class="form-check-input" type="radio" name="gender" value="หญิง" id="female">
                             <label class="form-check-label" for="female">หญิง</label>
                         </div>
                         <div class="invalid-feedback">
@@ -97,7 +98,7 @@
                         <label for="address">ที่อยู่</label>
                     </div>
                     <div class="col">
-                        <textarea id="address" class="form-control" rows="4"></textarea>
+                        <textarea id="address" name="address" class="form-control" rows="4"></textarea>
                         <div class="valid-feedback">
                             ถูกต้อง
                         </div>
@@ -112,12 +113,14 @@
                         <label for="color">สีที่ชอบ</label>
                     </div>
                     <div class="col">
-                        <select id="color" class="form-control">
+                        <select id="color" name="color" class="form-control">
                             <option value="">select</option>
                             <option value="แดง">แดง</option>
                             <option value="น้ำเงิน">น้ำเงิน</option>
                             <option value="เขียว">เขียว</option>
                             <option value="เหลือง">เหลือง</option>
+                            <option value="ดำ">ดำ</option>
+                            <option value="ขาว">ขาว</option>
                         </select>
                         <div class="valid-feedback">
                             ถูกต้อง
@@ -137,32 +140,32 @@
 
                         <div class="d-flex flex-wrap justify-content-center gap-3" id="theme">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="theme" id="rock" onchange="toggleOther()">
+                                <input class="form-check-input" type="radio" name="theme" value="rock" id="rock">
                                 <label class="form-check-label" for="rock">rock</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="theme" id="pop" onchange="toggleOther()">
+                                <input class="form-check-input" type="radio" name="theme" value="pop" id="pop">
                                 <label class="form-check-label" for="pop">pop</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="theme" id="jpop" onchange="toggleOther()">
+                                <input class="form-check-input" type="radio" name="theme" value="j-pop" id="jpop">
                                 <label class="form-check-label" for="jpop">j-pop</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="theme" id="kpop" onchange="toggleOther()">
+                                <input class="form-check-input" type="radio" name="theme" value="k-pop" id="kpop">
                                 <label class="form-check-label" for="kpop">k-pop</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="theme" id="jazz" onchange="toggleOther()">
+                                <input class="form-check-input" type="radio" name="theme" value="jazz" id="jazz">
                                 <label class="form-check-label" for="jazz">jazz</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="theme" id="other" onchange="toggleOther()">
+                                <input class="form-check-input" type="radio" name="theme" value="other" id="other">
                                 <label class="form-check-label" for="other">other</label>
                             </div>
                         </div>
@@ -180,11 +183,11 @@
                     <div class="col" id="agreement">
                     <div class="d-flex flex-column gap-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="agreement" id="accept_yes">
+                            <input class="form-check-input" type="radio" name="agreement" value="ยอมรับ" id="accept_yes">
                             <label class="form-check-label" for="accept_yes">ยินยอม</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="agreement" id="accept_no">
+                            <input class="form-check-input" type="radio" name="agreement" value="ไม่ยอมรับ" id="accept_no">
                             <label class="form-check-label" for="accept_no">ไม่ยินยอม</label>
                             <div class="invalid-feedback">
                                 โปรดเลือกว่าจะยินยอมหรือไม่
@@ -332,6 +335,19 @@
                 agreementError.style.display = 'none'
             }
 
+            if (
+                fname.value !== "" &&
+                lname.value !== "" &&
+                birth.value !== "" &&
+                genderChecked &&
+                address.value !== "" &&
+                color.value !== "" &&
+                themeChecked &&
+                agreementChecked
+            ) {
+            document.getElementById('form').submit(); // ← POST จริง
+    }
+
         }
 
         let myfunc = (callback) => {
@@ -367,22 +383,6 @@
             }
             reader.readAsDataURL(file)
         }
-
-        function toggleOther() {
-            const otherRadio = document.getElementById('other')
-            const otherInput = document.getElementById('otherTheme')
-
-            if (otherRadio.checked) {
-                otherInput.classList.remove('d-none')
-                otherInput.focus()
-            } else {
-                otherInput.classList.add('d-none')
-                otherInput.value = ''
-                otherInput.classList.remove('is-invalid')
-            }
-        }
-
-
 
         document.getElementById('form').addEventListener('reset', function () {
             setTimeout(() => {
