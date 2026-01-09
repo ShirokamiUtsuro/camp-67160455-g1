@@ -13,7 +13,7 @@ class FlightController extends Controller
     public function index()
     {
         $data['flight'] = Flight::all();
-        return view('flights.index', $data);
+        return view('flight.index', $data);
     }
     /**
      * Store a newly created resource in storage.
