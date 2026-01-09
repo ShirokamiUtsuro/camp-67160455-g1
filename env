@@ -22,6 +22,9 @@ LOG_LEVEL=debug
 
 DB_CONNECTION=sqlite
 DB_DATABASE=C:\laragon\www\camp-67160455-g1\database\database.sqlite
+DB_DATABASE=pokedex
+DB_USERNAME=root
+DB_PASSWORD=
 
 SESSION_DRIVER=database
 SESSION_LIFETIME=120
