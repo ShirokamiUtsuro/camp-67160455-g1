@@ -27,8 +27,6 @@
 <body>
 
 <div class="p-4">
-
-    {{-- กรอบฟอร์ม --}}
     <div class="box">
         <form action="{{ url('/pokedex') }}" method="POST">
             @csrf
